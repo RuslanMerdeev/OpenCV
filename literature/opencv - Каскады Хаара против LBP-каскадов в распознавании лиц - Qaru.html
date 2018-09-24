@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<!-- saved from url=(0081)http://qaru.site/questions/124178/haar-cascades-vs-lbp-cascades-in-face-detection -->
+<html itemscope="" itemtype="http://schema.org/QAPage" lang="ru-RU"><head itemscope="" itemtype="http://schema.org/WebSite"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title itemprop="name">opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://qaru.site/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://qaru.site/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://qaru.site/favicon-16x16.png">
+    <link rel="manifest" href="http://qaru.site/manifest.json">
+    <link rel="mask-icon" href="http://qaru.site/safari-pinned-tab.svg" color="#5bbad5">
+    <link href="https://qaru.site/" itemprop="url">
+    <script async="" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/async-ads.js"></script><script type="text/javascript" async="" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/tag.js"></script><script src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/ca-pub-9882502965778689.js"></script><script type="text/javascript" async="" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/cse.js"></script><script async="" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/analytics.js"></script><script type="application/javascript" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/ads.js"></script>
+    <meta name="theme-color" content="#ffffff">
+    <meta name="yandex-verification" content="68f8c2202f8948e2">
+    <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="hE9IZjhhxaMVY8YBRoXq2AAgN7rRyLdmWsQHVVbItVqA05RynMebFKTBa7lGjXv8lm69wYryHdrxm6bA4gzk_w==">
+    <meta name="description" content="Я экспериментировал с обнаружением лица в OpenCV (Open Source Computer Vision Library) и обнаружил, что можно использовать каскады Haar для обнаружения лиц, поскольку некоторые из них снабжены OpenCV. Однако я заметил, что есть также несколько каскад">
+<link href="http://qaru.site/questions/124178/haar-cascades-vs-lbp-cascades-in-face-detection" rel="canonical">
+<link href="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/all-2baad080848bee9a8f84bb3263025812.css" rel="stylesheet">    <!-- Google Analytics counter -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-99598005-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- /Google Analytics counter -->
+    <script async="" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/adsbygoogle.js"></script>
+    <script>
+        window.__gcse = {
+            callback: function() {
+                $('#___gcse_0 .gsc-clear-button').remove();
+                $('#___gcse_0 .gsc-search-button').remove();
+                $('#___gcse_0 .gsib_b').remove();
+                $('#___gcse_0 .gsc-input input').attr('placeholder', 'Поиск...');
+            }
+        };
+        (function() {
+            var cx = '011151660133384015389:9fypgkndwsa';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+        })();
+    </script>
+<link rel="preload" href="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/integrator.js" as="script"><script type="text/javascript" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/integrator.js"></script><link rel="preload" href="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/integrator(1).js" as="script"><script type="text/javascript" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/integrator(1).js"></script><script src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/jsapi" type="text/javascript"></script><link type="text/css" href="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/default+ru.css" rel="stylesheet"><link type="text/css" href="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/default.css" rel="stylesheet"><script type="text/javascript" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/default+ru.I.js"></script><style type="text/css">.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;position:relative;user-select:none;-webkit-user-select:none;white-space:nowrap}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gscsep_a{display:none}.gsq_a{padding:0}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em;-webkit-appearance:button}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gssb_a{padding:0 9px}.gsib_a{padding-right:8px;padding-left:8px}.gsst_a{padding-top:5.5px}.gssb_e{border:0}.gssb_l{margin:5px 0}input.gsc-input::-webkit-input-placeholder{font-size:14px}input.gsc-input:-moz-placeholder{font-size:14px}input.gsc-input::-moz-placeholder{font-size:14px}input.gsc-input:-ms-input-placeholder{font-size:14px}input.gsc-input:focus::-webkit-input-placeholder{color:transparent}input.gsc-input:focus:-moz-placeholder{color:transparent}input.gsc-input:focus::-moz-placeholder{color:transparent}input.gsc-input:focus:-ms-input-placeholder{color:transparent}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style></head>
+<body onload="prettyPrint()">
+<div class="wrap">
+    <nav id="w0" class="navbar-default navbar-static-top navbar"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w0-collapse"><span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span></button><a class="navbar-brand" href="http://qaru.site/"><img class="dark" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/logo-dark.svg"><div class="name">stack<span class="cl-orange">.io</span></div></a></div><div id="w0-collapse" class="collapse navbar-collapse"><ul id="w1" class="navbar-nav navbar-right nav"><li><a href="http://qaru.site/">Главная</a></li>
+<li class="active"><a href="http://qaru.site/questions">Вопросы</a></li>
+<li><a href="http://qaru.site/tags">Теги</a></li></ul>    <div class="search">
+        <div id="___gcse_0"><div class="gsc-control-searchbox-only gsc-control-searchbox-only-ru" dir="ltr"><form class="gsc-search-box gsc-search-box-tools" accept-charset="utf-8"><table cellspacing="0" cellpadding="0" class="gsc-search-box"><tbody><tr><td class="gsc-input"><div class="gsc-input-box" id="gsc-iw-id1"><table cellspacing="0" cellpadding="0" id="gs_id50" class="gstl_50 " style="width: 100%; padding: 0px;"><tbody><tr><td id="gs_tti50" class="gsib_a"><input autocomplete="off" type="text" size="10" class="gsc-input" name="search" title="поиск" id="gsc-i-id1" style="width: 100%; padding: 0px; border: none; margin: 0px; height: auto; outline: none;" dir="ltr" spellcheck="false" placeholder="Поиск..."></td></tr></tbody></table></div></td></tr></tbody></table><table cellspacing="0" cellpadding="0" class="gsc-branding"><tbody><tr style="display: none;"><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">технология</div></td><td class="gsc-branding-img"><img src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/googlelogo_grey_46x15dp.png" class="gsc-branding-img" srcset="https://www.google.com/cse/static/images/2x/googlelogo_grey_46x15dp.png 2x"></td></tr></tbody></table></form></div></div>
+    </div>
+    </div></div></nav>    <div class="container">
+        <div class="m-t-10" itemscope="" itemtype="http://schema.org/Question">
+    <div class="question-header">
+        <h1 itemprop="name">Каскады Хаара против LBP-каскадов в распознавании лиц</h1>
+    </div>
+            <div class="col-sm-3 hidden-xs pull-right">
+            <div class="row hidden-xs right-col sidebar">
+                                    <div class="awrap" style="max-width: 300px; margin-bottom: 5px; position: initial; bottom: initial; top: 16px;">
+                        <ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px;margin-top: -5px;" data-ad-client="ca-pub-9882502965778689" data-ad-slot="7447112667" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent;"><iframe width="300" height="600" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;width:300px;height:600px;" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/saved_resource.html"></iframe></ins></ins></ins>
+                        <script type="text/javascript">
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                        <ins class="adsbygoogle bootom" style="display:inline-block;width:300px;height:600px;margin-top: 15px" data-ad-client="ca-pub-9882502965778689" data-ad-slot="2476723796" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent;"><ins id="aswift_1_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent;"><iframe width="300" height="600" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;width:300px;height:600px;" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/saved_resource(1).html"></iframe></ins></ins></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                    <script type="text/javascript">
+                        document.addEventListener('DOMContentLoaded', function(){
+                            var awrap = $('.awrap');
+                            var lastScrollTop = 0;
+                            var wh = $(window).height();
+
+                            $(window).on('scroll', function () {
+                                var st = $(this).scrollTop();
+                                var ot = awrap.offset().top;
+                                var h = awrap.height();
+                                var dh = $(document).height();
+
+                                if (st < 109) {
+                                    awrap.css({position : 'initial'});
+                                } else {
+                                    if ($('.adsbygoogle.bootom *').length > 0) {
+                                        if (st > lastScrollTop
+                                            && (st + wh) >= h + ot + 5
+                                        ) {
+                                            if ((st + wh) <= dh - 75) {
+                                                awrap.css({position: 'fixed'});
+                                                awrap.css({bottom: 0});
+                                                awrap.css({top: 'initial'});
+                                            } else {
+                                                awrap.css({position : 'absolute'});
+                                                awrap.css({top : dh - h - 200});
+                                                awrap.css({bottom: 'initial'});
+                                            }
+                                        } else if (st < lastScrollTop && st <= ot-16) {
+                                            awrap.css({position: 'fixed'});
+                                            awrap.css({top: 16});
+                                            awrap.css({bottom: 'initial'});
+                                        } else if (awrap.css('position') !== 'absolute' && awrap.css('position') !== 'initial' && awrap.css('position') !== 'static') {
+                                            awrap.css({position : 'absolute'});
+                                            awrap.css({top : ot-125});
+                                            awrap.css({bottom: 'initial'});
+                                        }
+                                    } else {
+                                        awrap.css({position: 'fixed'});
+                                        awrap.css({top: 16});
+                                        awrap.css({bottom: 'initial'});
+                                    }
+                                }
+                                lastScrollTop = st;
+                            });
+                        });
+                    </script>
+                            </div>
+        </div>
+        <div class="col-sm-9 main-col">
+        <div class="row question">
+            <div class="left-row">
+                <div class="votes">
+                    <i class="fa fa-caret-up vote"></i>
+                    <div class="vote-count" itemprop="upvoteCount">43</div>
+                    <i class="fa fa-caret-down vote"></i>
+                    <i class="fa fa-star star"></i>
+                </div>
+            </div>
+            <div class="question-row">
+                <div class="question-text">
+                    <div class="description" itemprop="text">
+                        <p>Я экспериментировал с обнаружением лица в OpenCV (Open Source Computer Vision Library) и обнаружил, что можно использовать каскады Haar для обнаружения лиц, поскольку некоторые из них снабжены OpenCV. Однако я заметил, что есть также несколько каскадов LBP. Проведя некоторое исследование, я обнаружил, что LBP обозначает локальные двоичные рисунки, а также может использоваться для распознавания лиц в соответствии с <a href="http://opencv.itseez.com/doc/tutorials/objdetect/cascade_classifier/cascade_classifier.html" rel="nofollow noreferrer">OpenCV Face Detection Documentation</a>.</p><ins class="adsbygoogle" style="display: block; text-align: center; margin-bottom: 10px; height: 200px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9882502965778689" data-ad-slot="7697893094" data-adsbygoogle-status="done"><ins id="aswift_2_expand" style="display:inline-table;border:none;height:200px;margin:0;padding:0;position:relative;visibility:visible;width:810px;background-color:transparent;"><ins id="aswift_2_anchor" style="display:block;border:none;height:200px;margin:0;padding:0;position:relative;visibility:visible;width:810px;background-color:transparent;"><iframe width="810" height="200" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;width:810px;height:200px;" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/saved_resource(2).html"></iframe></ins></ins></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<p>Что я хотел бы знать, это работает лучше? Какой из них работает быстрее, а какой более точный? Кажется, что LBP работает быстрее, но я тоже не уверен на 100%. Спасибо.</p>                    </div>
+                    <div class="tags">
+                                                    <a href="http://qaru.site/questions/tagged/opencv" class="tag" title="показать вопросы с меткой &#39;opencv&#39;" rel="tag">opencv</a>
+                                                    <a href="http://qaru.site/questions/tagged/face-detection" class="tag" title="показать вопросы с меткой &#39;face-detection&#39;" rel="tag">face-detection</a>
+                                                    <a href="http://qaru.site/questions/tagged/haar-wavelet" class="tag" title="показать вопросы с меткой &#39;haar-wavelet&#39;" rel="tag">haar-wavelet</a>
+                                                    <a href="http://qaru.site/questions/tagged/cascade" class="tag" title="показать вопросы с меткой &#39;cascade&#39;" rel="tag">cascade</a>
+                                                    <a href="http://qaru.site/questions/tagged/viola-jones" class="tag" title="показать вопросы с меткой &#39;viola-jones&#39;" rel="tag">viola-jones</a>
+                                            </div>
+                    <div class="clearfix"></div>
+                    <div class="action-time">
+                                                задан <a href="https://stackoverflow.com/users/1139018/bojoeb" rel="noopener" target="_blank">Bojoeb</a>                        <span title="1326124437" class="relativetime"> 09 янв. '12 в  18:53</span>
+                    </div>
+                    <a class="a-link" href="https://stackoverflow.com/questions/8791178/haar-cascades-vs-lbp-cascades-in-face-detection" target="_blank" rel="noopener">источник</a>
+                    <a class="share-link" href="http://qaru.site/questions/124178/haar-cascades-vs-lbp-cascades-in-face-detection" title="поделиться">поделиться</a>
+                </div>
+            </div>
+        </div>
+        <div class="row answers" id="answers">
+            <div class="answers-header">
+                <h2 class="pull-left"><span itemprop="answerCount">5</span> ответов</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="answer-pager">
+                            </div>
+                            <div class="answer" id="755928" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+                    <div class="left-row">
+                        <div class="votes">
+                            <i class="fa fa-caret-up vote"></i>
+                            <div class="vote-count" itemprop="upvoteCount">48</div>
+                            <i class="fa fa-caret-down vote"></i>
+                            <i class="fa fa-check accepted"></i>                        </div>
+                    </div>
+                    <div class="answer-row">
+                        <div class="answer-text">
+                            <div class="description" itemprop="text">
+                                <p>LBP быстрее (в несколько раз быстрее), но менее точен. (На 10-20% меньше Хаара).</p><ins class="adsbygoogle" style="display: block; text-align: center; margin-bottom: 10px; height: 200px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9882502965778689" data-ad-slot="4361429107" data-adsbygoogle-status="done"><ins id="aswift_3_expand" style="display:inline-table;border:none;height:200px;margin:0;padding:0;position:relative;visibility:visible;width:810px;background-color:transparent;"><ins id="aswift_3_anchor" style="display:block;border:none;height:200px;margin:0;padding:0;position:relative;visibility:visible;width:810px;background-color:transparent;"><iframe width="810" height="200" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;width:810px;height:200px;" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/saved_resource(3).html"></iframe></ins></ins></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<p>Если вы хотите обнаружить лица во встроенной системе, я думаю, что LBP - это выбор, потому что он выполняет все вычисления в целых числах. Haar использует поплавки, которые являются убийцами для встроенных/мобильных.</p>                            </div>
+                                                            <ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-9882502965778689" data-ad-slot="9599853156" data-ad-format="link" data-adsbygoogle-status="done"><ins id="aswift_4_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:810px;background-color:transparent;"><ins id="aswift_4_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:810px;background-color:transparent;"><iframe width="810" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_4" name="aswift_4" style="left:0;position:absolute;top:0;width:810px;height:90px;" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/saved_resource(4).html"></iframe></ins></ins></ins>
+                                <script>
+                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                                                        <div class="action-time">
+                                                                ответ дан <a href="https://stackoverflow.com/users/981773/sam" rel="noopener" target="_blank">Sam</a>                                <span title="1326127424" class="relativetime"> 09 янв. '12 в  19:43</span>
+                            </div>
+                                                            <a class="a-link" href="https://stackoverflow.com/questions/8791178/haar-cascades-vs-lbp-cascades-in-face-detection/8791937#8791937" target="_blank" rel="noopener">источник</a>
+                                                        <a class="share-link" href="http://qaru.site/questions/124178/haar-cascades-vs-lbp-cascades-in-face-detection/755928#755928" title="поделиться">поделиться</a>
+                        </div>
+                    </div>
+                </div>
+                            <div class="answer" id="755931" itemscope="" itemtype="http://schema.org/Answer">
+                    <div class="left-row">
+                        <div class="votes">
+                            <i class="fa fa-caret-up vote"></i>
+                            <div class="vote-count" itemprop="upvoteCount">14</div>
+                            <i class="fa fa-caret-down vote"></i>
+                                                    </div>
+                    </div>
+                    <div class="answer-row">
+                        <div class="answer-text">
+                            <div class="description" itemprop="text">
+                                <p>Каскад LBP может обучаться так же (или лучше), чем каскад Хаара, но из коробки каскад Хаара примерно в 3 раза медленнее, и в зависимости от ваших данных, на 1-2% лучше при точном обнаружении расположение лица. Это увеличение точности весьма значимо, поскольку распознавание лица может работать в диапазоне точности 95% +.</p>
+
+<p>Ниже приведены некоторые результаты при использовании набора <a href="http://www.milbo.org/muct/" rel="nofollow noreferrer">MUCT</a>.</p><ins class="adsbygoogle" style="display: block; text-align: center; margin-bottom: 10px; height: 200px;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-9882502965778689" data-ad-slot="4890045437" data-adsbygoogle-status="done"><ins id="aswift_5_expand" style="display:inline-table;border:none;height:200px;margin:0;padding:0;position:relative;visibility:visible;width:810px;background-color:transparent;"><ins id="aswift_5_anchor" style="display:block;border:none;height:200px;margin:0;padding:0;position:relative;visibility:visible;width:810px;background-color:transparent;"><iframe width="810" height="200" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_5" name="aswift_5" style="left:0;position:absolute;top:0;width:810px;height:200px;" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/saved_resource(5).html"></iframe></ins></ins></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<p>Правильное обнаружение отмечается, когда имеется по меньшей мере 50% -ное перекрытие между обнаруженной землей и обнаруженными координатами OpenCV.</p>
+
+<pre class="prettyprint-override prettyprinted" style=""><code><span class="typ">Cascade</span><span class="pun">:</span><span class="pln">haarcascade_frontalface_alt2</span><span class="pun">.</span><span class="pln">xml
+</span><span class="typ">Datafile</span><span class="pun">:</span><span class="pln">muct</span><span class="pun">.</span><span class="pln">csv
+</span><span class="pun">|---------------------------------------------------|</span><span class="pln">
+</span><span class="pun">|</span><span class="pln">   </span><span class="typ">Hits</span><span class="pln">  </span><span class="pun">|</span><span class="pln">  </span><span class="typ">Misses</span><span class="pln">  </span><span class="pun">|</span><span class="pln"> </span><span class="kwd">False</span><span class="pln"> </span><span class="typ">Detects</span><span class="pln">  </span><span class="pun">|</span><span class="pln"> </span><span class="typ">Multi</span><span class="pun">-</span><span class="pln">hit   </span><span class="pun">|</span><span class="pln">
+</span><span class="pun">|</span><span class="pln">  </span><span class="lit">3635</span><span class="pln">   </span><span class="pun">|</span><span class="pln">   </span><span class="lit">55</span><span class="pln">     </span><span class="pun">|</span><span class="pln">   </span><span class="lit">63</span><span class="pln">           </span><span class="pun">|</span><span class="pln">    </span><span class="lit">5</span><span class="pln">        </span><span class="pun">|</span><span class="pln">
+</span><span class="pun">|---------------------------------------------------|</span><span class="pln">
+</span><span class="typ">Time</span><span class="pun">:</span><span class="lit">4m2.060s</span></code></pre>
+
+<p>против</p>
+
+<pre class="prettyprint-override prettyprinted" style=""><code><span class="typ">Cascade</span><span class="pun">:</span><span class="pln">lbpcascade_frontalface</span><span class="pun">.</span><span class="pln">xml
+</span><span class="typ">Datafile</span><span class="pun">:</span><span class="pln">muct</span><span class="pun">.</span><span class="pln">csv
+</span><span class="pun">|---------------------------------------------------|</span><span class="pln">
+</span><span class="pun">|</span><span class="pln">   </span><span class="typ">Hits</span><span class="pln">  </span><span class="pun">|</span><span class="pln">  </span><span class="typ">Misses</span><span class="pln">  </span><span class="pun">|</span><span class="pln"> </span><span class="kwd">False</span><span class="pln"> </span><span class="typ">Detects</span><span class="pln">  </span><span class="pun">|</span><span class="pln"> </span><span class="typ">Multi</span><span class="pun">-</span><span class="pln">hit   </span><span class="pun">|</span><span class="pln">
+</span><span class="pun">|</span><span class="pln"> </span><span class="lit">3569</span><span class="pln">    </span><span class="pun">|</span><span class="pln">  </span><span class="lit">106</span><span class="pln">     </span><span class="pun">|</span><span class="pln">   </span><span class="lit">77</span><span class="pln">           </span><span class="pun">|</span><span class="pln">    </span><span class="lit">3</span><span class="pln">        </span><span class="pun">|</span><span class="pln">
+</span><span class="pun">|---------------------------------------------------|</span><span class="pln">
+</span><span class="typ">Time</span><span class="pun">:</span><span class="lit">1m12.511s</span></code></pre>                            </div>
+                                                        <div class="action-time">
+                                                                ответ дан <a href="https://stackoverflow.com/users/922313/nouserexception" rel="noopener" target="_blank">NoUserException</a>                                <span title="1400873306" class="relativetime"> 23 мая '14 в  22:28</span>
+                            </div>
+                                                            <a class="a-link" href="https://stackoverflow.com/questions/8791178/haar-cascades-vs-lbp-cascades-in-face-detection/23837086#23837086" target="_blank" rel="noopener">источник</a>
+                                                        <a class="share-link" href="http://qaru.site/questions/124178/haar-cascades-vs-lbp-cascades-in-face-detection/755931#755931" title="поделиться">поделиться</a>
+                        </div>
+                    </div>
+                </div>
+                            <div class="answer" id="755930" itemscope="" itemtype="http://schema.org/Answer">
+                    <div class="left-row">
+                        <div class="votes">
+                            <i class="fa fa-caret-up vote"></i>
+                            <div class="vote-count" itemprop="upvoteCount">9</div>
+                            <i class="fa fa-caret-down vote"></i>
+                                                    </div>
+                    </div>
+                    <div class="answer-row">
+                        <div class="answer-text">
+                            <div class="description" itemprop="text">
+                                <p>Мое личное мнение заключается в том, что вы должны изучить LBP для всех задач, связанных с обнаружением, просто потому, что обучение LBP может занять несколько минут, в то время как обучение HAAR может занять несколько дней для одного и того же набора данных и параметров обучения.</p>
+
+<p>Заданный вами вопрос будет иметь различную производительность в зависимости от типа обнаруженной вещи, настроек обучения и параметров, используемых во время обнаружения, а также критериев для проверки каскадов.</p>
+
+<p>Точность как каскадов HAAR, так и LBP зависит от наборов данных (положительных и отрицательных выборок), используемых для их обучения и параметров, используемых во время обучения.</p>
+
+<p>в соответствии с <a href="http://www.multimedia-computing.de/mediawiki/images/5/52/MRL-TR-May02-revised-Dec02.pdf" rel="nofollow noreferrer">Lienhart et al, 2002</a>, в случае обнаружения лица:</p>
+
+<ul><li> параметры  <code>-numStages</code>, <code>-maxDepth</code> и <code>-maxWeakCount</code> должны быть достаточно высокими для достижения желаемых <code>-minHitRate</code> и <code>-maxFalseAlarmRate</code>.</li>
+<li> Обучение на основе дерева более точное, чем основанный на пнях,</li>
+<li> мягкий абабуст предпочтительнее дискретного и реального adaboost,</li>
+<li> минимальный размер учебной выборки имеет значение, но систематическое исследование об этом еще предстоит сделать.</li>
+</ul><p>также флаги, используемые в detectMultiScale(), приводят к резкому изменению скорости, а также точности в заданной аппаратной конфигурации.</p>
+
+<p>для проверки каскада вы должны  <strong> установить на набор данных</strong> и такой метод, как k-fold <a href="https://en.wikipedia.org/wiki/Cross-validation_(statistics)" rel="nofollow noreferrer">перекрестная проверка</a>.</p>                            </div>
+                                                        <div class="action-time">
+                                                                ответ дан <a href="https://stackoverflow.com/users/1463143/samkhan13" rel="noopener" target="_blank">samkhan13</a>                                <span title="1385204724" class="relativetime"> 23 нояб. '13 в  14:05</span>
+                            </div>
+                                                            <a class="a-link" href="https://stackoverflow.com/questions/8791178/haar-cascades-vs-lbp-cascades-in-face-detection/20161534#20161534" target="_blank" rel="noopener">источник</a>
+                                                        <a class="share-link" href="http://qaru.site/questions/124178/haar-cascades-vs-lbp-cascades-in-face-detection/755930#755930" title="поделиться">поделиться</a>
+                        </div>
+                    </div>
+                </div>
+                            <div class="answer" id="755932" itemscope="" itemtype="http://schema.org/Answer">
+                    <div class="left-row">
+                        <div class="votes">
+                            <i class="fa fa-caret-up vote"></i>
+                            <div class="vote-count" itemprop="upvoteCount">7</div>
+                            <i class="fa fa-caret-down vote"></i>
+                                                    </div>
+                    </div>
+                    <div class="answer-row">
+                        <div class="answer-text">
+                            <div class="description" itemprop="text">
+                                <p>Может быть, это будет полезно для вас:</p>
+
+<p>Существует <a href="https://github.com/ermig1979/Simd" rel="nofollow noreferrer">Simd Library</a>, которая имеет <a href="https://github.com/ermig1979/Simd/blob/master/src/Simd/SimdDetection.hpp" rel="nofollow noreferrer">реализация</a> каскадных классификаторов HAAR и LBP. Он может использовать стандартные каскады HAAR и LBP от OpenCV. Эта реализация имеет оптимизацию SIMD с использованием SSE4.1, AVX2, AVX-512 и NEON (ARM), поэтому она работает в 2-3 раза быстрее, чем оригинальная реализация OpenCV.</p>                            </div>
+                                                        <div class="action-time">
+                                                                ответ дан <a href="https://stackoverflow.com/users/2831104/ermig" rel="noopener" target="_blank">ErmIg</a>                                <span title="1462449671" class="relativetime"> 05 мая '16 в  15:01</span>
+                            </div>
+                                                            <a class="a-link" href="https://stackoverflow.com/questions/8791178/haar-cascades-vs-lbp-cascades-in-face-detection/37050067#37050067" target="_blank" rel="noopener">источник</a>
+                                                        <a class="share-link" href="http://qaru.site/questions/124178/haar-cascades-vs-lbp-cascades-in-face-detection/755932#755932" title="поделиться">поделиться</a>
+                        </div>
+                    </div>
+                </div>
+                            <div class="answer" id="755929" itemscope="" itemtype="http://schema.org/Answer">
+                    <div class="left-row">
+                        <div class="votes">
+                            <i class="fa fa-caret-up vote"></i>
+                            <div class="vote-count" itemprop="upvoteCount">5</div>
+                            <i class="fa fa-caret-down vote"></i>
+                                                    </div>
+                    </div>
+                    <div class="answer-row">
+                        <div class="answer-text">
+                            <div class="description" itemprop="text">
+                                <p>Кроме того, на этапах обучения LBP быстрее, чем Haar. С образцом 2000 pos и 300 отрицательным образцом, с использованием типа Haar, потребовалось около 5-6 дней, но с LBP это заняло всего несколько часов.</p>                            </div>
+                                                        <div class="action-time">
+                                                                ответ дан <a href="https://stackoverflow.com/users/1745871/%c4%90%c3%b4n-nguy%e1%bb%85n" rel="noopener" target="_blank">Đôn Nguyễn</a>                                <span title="1370133123" class="relativetime"> 02 июня '13 в  3:32</span>
+                            </div>
+                                                            <a class="a-link" href="https://stackoverflow.com/questions/8791178/haar-cascades-vs-lbp-cascades-in-face-detection/16878641#16878641" target="_blank" rel="noopener">источник</a>
+                                                        <a class="share-link" href="http://qaru.site/questions/124178/haar-cascades-vs-lbp-cascades-in-face-detection/755929#755929" title="поделиться">поделиться</a>
+                        </div>
+                    </div>
+                </div>
+                                            <div class="text-center">
+                        <ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-9882502965778689" data-ad-slot="4680151662" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_6_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:875px;background-color:transparent;"><ins id="aswift_6_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:875px;background-color:transparent;"><iframe width="875" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_6" name="aswift_6" style="left:0;position:absolute;top:0;width:875px;height:90px;" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/saved_resource(6).html"></iframe></ins></ins></ins>
+                    </div>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                        <div class="answer-pager">
+                            </div>
+        </div>
+        <div class="row bottom-notice">
+            <p>Ознакомьтесь с другими вопросами по меткам                                    <a href="http://qaru.site/questions/tagged/opencv" class="tag" title="показать вопросы с меткой &#39;opencv&#39;" rel="tag">opencv</a>
+                                    <a href="http://qaru.site/questions/tagged/face-detection" class="tag" title="показать вопросы с меткой &#39;face-detection&#39;" rel="tag">face-detection</a>
+                                    <a href="http://qaru.site/questions/tagged/haar-wavelet" class="tag" title="показать вопросы с меткой &#39;haar-wavelet&#39;" rel="tag">haar-wavelet</a>
+                                    <a href="http://qaru.site/questions/tagged/cascade" class="tag" title="показать вопросы с меткой &#39;cascade&#39;" rel="tag">cascade</a>
+                                    <a href="http://qaru.site/questions/tagged/viola-jones" class="tag" title="показать вопросы с меткой &#39;viola-jones&#39;" rel="tag">viola-jones</a>
+                            </p>
+        </div>
+    </div>
+</div>    </div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <div class="pull-left">
+            <div class="license">
+                user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="nofollow license">cc by-sa 3.0</a>
+                with attribution required.
+            </div>
+        </div>
+        <div class="pull-right logo">
+            <a href="http://qaru.site/questions/124178/haar-cascades-vs-lbp-cascades-in-face-detection#">
+                <img src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/logo-dark.svg">
+                <div class="name">stack<span class="cl-orange">.io</span></div>
+            </a>
+        </div>
+    </div>
+</footer>
+<script src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/all-9b8f26f44dc929fb3af7fe696f39a313.js"></script><!-- Yandex.Metrika counter -->
+<script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter44607970 = new Ya.Metrika2({ id:44607970, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/tag.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks2"); </script> <noscript>&lt;div&gt;&lt;img src="https://mc.yandex.ru/watch/44607970" style="position:absolute; left:-9999px;" alt="" /&gt;&lt;/div&gt;</noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+<iframe name="_ym_native" frameborder="0" style="opacity: 0; width: 0px; height: 0px; position: absolute; left: 100%; bottom: 100%;" src="./opencv - Каскады Хаара против LBP-каскадов в распознавании лиц - Qaru_files/saved_resource(7).html"></iframe><div class="_ym_zoom" style="bottom: 100%; position: fixed; width: 100vw;"></div><div class="_ym_viewport" style="bottom: 100%; position: fixed; width: 100%; height: 100%;"></div><table cellspacing="0" cellpadding="0" class="gstl_50 gssb_c" style="width: 198px; display: none; top: 37px; left: 1036px; position: absolute;"><tbody><tr><td class="gssb_f"></td><td class="gssb_e" style="width: 100%;"></td></tr></tbody></table></body></html>
